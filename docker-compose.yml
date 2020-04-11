@@ -1,12 +1,20 @@
 version: "3"
 services:
+  nginx:
+    restart_policy: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "3050:80"
+      
   postgres:
     image: "postgres:latest"
     environment:
       - POSTGRES_PASSWORD=postgres_password
   redis:
     image: "redis:latest"
-  server:
+  api:
     build:
       dockerfile: Dockerfile.dev
       context: ./server
@@ -21,3 +29,17 @@ services:
       - PG_DATABASE=postgres
       - PG_PASSWORD=postgres_password
       - PG_PORT=5432
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  worker:
+    build:
+      Dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - /app/node_modules
+      - ./worker:/app
