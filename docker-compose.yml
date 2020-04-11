@@ -1,13 +1,15 @@
 version: "3"
 services:
   nginx:
-    restart_policy: always
+    depends_on:
+      - api
+      - client
+    restart: always
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
       - "3050:80"
-      
   postgres:
     image: "postgres:latest"
     environment:
@@ -15,12 +17,14 @@ services:
   redis:
     image: "redis:latest"
   api:
+    depends_on:
+      - postgres
     build:
       dockerfile: Dockerfile.dev
-      context: ./server
+      context: ./api
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./api:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -36,10 +40,14 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    stdin_open: true
   worker:
     build:
-      Dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.dev
       context: ./worker
     volumes:
       - /app/node_modules
       - ./worker:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379

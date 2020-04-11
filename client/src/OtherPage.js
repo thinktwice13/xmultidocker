@@ -9,5 +9,3 @@ export default () => {
     </div>
   );
 };
-
-export default OtherPage;
