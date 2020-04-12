@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "thinktwice13/xmultidocker-client",
+      "hostname": "client",
+      "essential": true
+    },
+    {
+      "name": "api",
+      "image": "thinktwice13/xmultidocker-api",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "thinktwice13/xmultidocker-worker",
+      "hostname": "worker",
+      "essential": false
+    }
+  ]
+}
