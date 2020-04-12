@@ -13,3 +13,10 @@ after_success:
   - docker build -t thinktwice13/xmultidocker-api ./api
   - docker build -t thinktwice13/xmultidocker-client ./client
   - docker build -t thinktwice13/xmultidocker-nginx ./nginx
+
+  # login to Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push thinktwice13/xmultidocker-worker
+  - docker push thinktwice13/xmultidocker-api
+  - docker push thinktwice13/xmultidocker-client
+  - docker push thinktwice13/xmultidocker-nginx
