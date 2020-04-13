@@ -6,15 +6,15 @@ before_install:
 script:
   - docker run -e CI=true thinktwice13/xmultidocker-react npm test -- --coverage
 after_success:
-  - docker build -t thinktwice13/xmultidocker-worker ./worker
-  - docker build -t thinktwice13/xmultidocker-api ./api
-  - docker build -t thinktwice13/xmultidocker-client ./client
-  - docker build -t thinktwice13/xmultidocker-nginx ./nginx
+  - docker build -t thinktwice13/xmultidocker-worker:latest ./worker
+  - docker build -t thinktwice13/xmultidocker-api:latest ./api
+  - docker build -t thinktwice13/xmultidocker-client:latest ./client
+  - docker build -t thinktwice13/xmultidocker-nginx:latest ./nginx
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push thinktwice13/xmultidocker-worker
-  - docker push thinktwice13/xmultidocker-api
-  - docker push thinktwice13/xmultidocker-client
-  - docker push thinktwice13/xmultidocker-nginx
+  - docker push thinktwice13/xmultidocker-worker:latest
+  - docker push thinktwice13/xmultidocker-api:latest
+  - docker push thinktwice13/xmultidocker-client:latest
+  - docker push thinktwice13/xmultidocker-nginx:latest
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY
@@ -24,5 +24,5 @@ deploy:
   env: xmultidocker-env
   bucket: elasticbeanstalk-us-east-1-001868528084
   on:
-    branch: master
     repo: thinktwice13/xmultidocker
+    branch: master

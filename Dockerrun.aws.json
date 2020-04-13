@@ -3,28 +3,28 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "thinktwice13/xmultidocker-client",
+      "image": "thinktwice13/xmultidocker-client:latest",
       "memory": 128,
       "hostname": "client",
       "essential": true
     },
     {
       "name": "api",
-      "image": "thinktwice13/xmultidocker-api",
+      "image": "thinktwice13/xmultidocker-api:latest",
       "memory": 128,
       "hostname": "api",
       "essential": false
     },
     {
       "name": "worker",
-      "image": "thinktwice13/xmultidocker-worker",
+      "image": "thinktwice13/xmultidocker-worker:latest",
       "memory": 128,
       "hostname": "worker",
       "essential": false
     },
     {
       "name": "nginx",
-      "image": "thinktwice13/xmultidocker-nginx",
+      "image": "thinktwice13/xmultidocker-nginx:latest",
       "memory": 128,
       "essential": true,
       "portMappings": [
