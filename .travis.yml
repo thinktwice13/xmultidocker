@@ -1,22 +1,28 @@
 sudo: required
 services:
   - docker
-
 before_install:
   - docker build -t thinktwice13/xmultidocker-react -f ./client/Dockerfile.dev ./client
-
 script:
   - docker run -e CI=true thinktwice13/xmultidocker-react npm test -- --coverage
-
 after_success:
   - docker build -t thinktwice13/xmultidocker-worker ./worker
   - docker build -t thinktwice13/xmultidocker-api ./api
   - docker build -t thinktwice13/xmultidocker-client ./client
   - docker build -t thinktwice13/xmultidocker-nginx ./nginx
-
-  # login to Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push thinktwice13/xmultidocker-worker
   - docker push thinktwice13/xmultidocker-api
   - docker push thinktwice13/xmultidocker-client
   - docker push thinktwice13/xmultidocker-nginx
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: AKIAQA327PHKNDLZQOOZ
+  secret_access_key:
+    secure: Jr1TLNuRDn7BOJEFQ/qumXpv16DKFNGdUuoLKZ6Q68YB351mRpdCTOkoaSGB+LKZGZihNmpOpxEG4lyLJWX9X30Ic1DyVrgs7TpeyW4qiNOrIseehHo5OCPbPNv2oahVgbJ07F1mW4zsP96lveX2EDEOXfTTOIgvgNoi3g4dtOUiANwlbe5WoESR0QFYCMCju1vPtlJ8LIs9352J6UoyDjzHblQUjclzIBonSPP3hiT8KG1WeME/VmPHDNWO93P8nk1rZq5Ufg2SoPFEfDoi3tgyJKVdtQvlHRjNLusXLN/UyE3qn0u8UMo4SJxHxJkxG2oaT0Y5mvEBt53tYl+B6XmN20pGUGQ2TQ928O9gIGfkbWbGDdPrtJ499Gt+6Nh7vk3SQLEm1ZbIZ9PtfDWSB8DVP2sxRZh38F31reSEjD3KO1SUBwHa4bwPQb4xoPFPd4SYEidb7SSh+U/ca3qKJNgFHQf0FxYq9K0Cnsyeq0QLaColANSiE7+FtSSTWCZcFUP2n1qqbBREJ2v3S8c1z9MVjcf+CUxfBIk7QHcS2wqyqqbToad+Ka7mDONIywi1AOE99zzqYYzrYXGUBUTvP4l13O905s+nzOD+iba0AhYDB+rWru1dItuiKgKQqHU8xnQ3ENGvs33phDCeeVsVXGDWFsY7ZDRpSqEOFK6Zi+0=
+  region: us-east-1
+  app: xmultidocker
+  env: xmultidocker-env
+  on:
+    repo: thinktwice13/xmultidocker
+    branch: master
