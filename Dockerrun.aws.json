@@ -18,15 +18,16 @@
     {
       "name": "worker",
       "image": "thinktwice13/xmultidocker-worker",
-      "memory": 64,
+      "memory": 128,
       "hostname": "worker",
       "essential": true
     },
     {
       "name": "nginx",
       "image": "thinktwice13/xmultidocker-nginx",
+      "hostname": "nginx",
       "essential": true,
-      "memory": 64,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
