@@ -4,19 +4,21 @@
     {
       "name": "client",
       "image": "thinktwice13/xmultidocker-client",
-      "memoryReservation": 128,
+      "memory": 128,
       "hostname": "client",
       "essential": true
     },
     {
       "name": "api",
       "image": "thinktwice13/xmultidocker-api",
+      "memory": 128,
       "hostname": "api",
       "essential": true
     },
     {
       "name": "worker",
       "image": "thinktwice13/xmultidocker-worker",
+      "memory": 64,
       "hostname": "worker",
       "essential": true
     },
@@ -24,6 +26,7 @@
       "name": "nginx",
       "image": "thinktwice13/xmultidocker-nginx",
       "essential": true,
+      "memory": 64,
       "portMappings": [
         {
           "hostPort": 80,
