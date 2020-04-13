@@ -17,12 +17,13 @@ after_success:
   - docker push thinktwice13/xmultidocker-nginx
 deploy:
   provider: elasticbeanstalk
-  access_key_id: AKIAQA327PHKNDLZQOOZ
+  access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
-    secure: Jr1TLNuRDn7BOJEFQ/qumXpv16DKFNGdUuoLKZ6Q68YB351mRpdCTOkoaSGB+LKZGZihNmpOpxEG4lyLJWX9X30Ic1DyVrgs7TpeyW4qiNOrIseehHo5OCPbPNv2oahVgbJ07F1mW4zsP96lveX2EDEOXfTTOIgvgNoi3g4dtOUiANwlbe5WoESR0QFYCMCju1vPtlJ8LIs9352J6UoyDjzHblQUjclzIBonSPP3hiT8KG1WeME/VmPHDNWO93P8nk1rZq5Ufg2SoPFEfDoi3tgyJKVdtQvlHRjNLusXLN/UyE3qn0u8UMo4SJxHxJkxG2oaT0Y5mvEBt53tYl+B6XmN20pGUGQ2TQ928O9gIGfkbWbGDdPrtJ499Gt+6Nh7vk3SQLEm1ZbIZ9PtfDWSB8DVP2sxRZh38F31reSEjD3KO1SUBwHa4bwPQb4xoPFPd4SYEidb7SSh+U/ca3qKJNgFHQf0FxYq9K0Cnsyeq0QLaColANSiE7+FtSSTWCZcFUP2n1qqbBREJ2v3S8c1z9MVjcf+CUxfBIk7QHcS2wqyqqbToad+Ka7mDONIywi1AOE99zzqYYzrYXGUBUTvP4l13O905s+nzOD+iba0AhYDB+rWru1dItuiKgKQqHU8xnQ3ENGvs33phDCeeVsVXGDWFsY7ZDRpSqEOFK6Zi+0=
+    secure: $AWS_SECRET_KEY
   region: us-east-1
   app: xmultidocker
   env: xmultidocker-env
+  bucket: elasticbeanstalk-us-east-1-001868528084
   on:
     repo: thinktwice13/xmultidocker
     branch: master
