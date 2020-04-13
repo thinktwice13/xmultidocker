@@ -4,6 +4,7 @@
     {
       "name": "client",
       "image": "thinktwice13/xmultidocker-client",
+      "memoryReservation": 128,
       "hostname": "client",
       "essential": true
     },
@@ -11,13 +12,13 @@
       "name": "api",
       "image": "thinktwice13/xmultidocker-api",
       "hostname": "api",
-      "essential": false
+      "essential": true
     },
     {
       "name": "worker",
       "image": "thinktwice13/xmultidocker-worker",
       "hostname": "worker",
-      "essential": false
+      "essential": true
     },
     {
       "name": "nginx",
