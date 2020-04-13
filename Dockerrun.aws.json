@@ -26,7 +26,7 @@
       "name": "nginx",
       "image": "thinktwice13/xmultidocker-nginx",
       "memory": 128,
-      "essential": false,
+      "essential": true,
       "portMappings": [
         {
           "hostPort": 80,
