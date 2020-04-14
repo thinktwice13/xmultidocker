@@ -24,5 +24,4 @@ deploy:
   env: xmultidocker-env
   bucket: elasticbeanstalk-us-east-1-001868528084
   on:
-    repo: thinktwice13/xmultidocker
     branch: master
