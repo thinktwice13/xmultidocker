@@ -5,7 +5,7 @@ class Fib extends Component {
   state = {
     seenIndices: [],
     values: {},
-    index: "",
+    index: "",  
   };
 
   componentDidMount() {
