@@ -20,10 +20,10 @@ spec:
               value: redis-cluster-ip-service
             - name: REDIS_PORT
               value: "6379"
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
           # no need for ports (or services) because nothing will be connecting inbound to this worker
           # ports:
           #   - containerPort: <Port>

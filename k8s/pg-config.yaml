@@ -18,11 +18,11 @@ spec:
             claimName: db-persistent-volume-claim
       containers:
         - name: pg
-          image: postgres:alpine
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+          image: postgres
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -30,7 +30,7 @@ spec:
               mountPath: /var/lib/postgresql/data
               subPath: postgres
           env:
-            - name: PGPASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: pgpassword
